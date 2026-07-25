@@ -1,44 +1,58 @@
-from sys import argv
-
 
 def bracket_validator(s: str) -> bool:
     stack = []
-    flag = True
+    brackets = {'(': ')', '[': ']', '{': '}'}
 
-    if len(s) == 0:
-        return True
+    for c in s:
+        if c in brackets:
+            stack.append(c)
+        if c in brackets.values():
+            if not stack:
+                return False
+            if brackets[stack[-1]] != c:
+                return False
+            stack.pop()
 
-    if "(" in s:
-        stack.append("(")
-    if "[" in s:
-        stack.append("[")
-    if "{" in s:
-        stack.append("{")
+    return len(stack) == 0
 
-    if ")" in s:
-        print(stack)
-        if not stack or stack[-1] != "(":
-            return False
-        elif stack[-1] == "(":
-            stack.pop(-1)
 
-    if "]" in s:
-        print(stack)
-        if not stack or stack[-1] != "[":
-            return False
-        elif stack[-1] == "[":
-            stack.pop(-1)
+def main1():
+    print("\nInput: bracket_validator('()')")
+    print("Output:", bracket_validator('()'))
 
-    if "}" in s:
-        if not stack or stack[-1] != "{":
-            return False
+    print("\nInput: bracket_validator('()[]{}')")
+    print("Output:", bracket_validator('()[]{}'))
 
-    print(stack)
-    return flag
+    print("\nInput: bracket_validator('(]')")
+    print("Output:", bracket_validator('(]'))
+
+    print("\nInput: bracket_validator('([)]')")
+    print("Output:", bracket_validator('([)]'))
+
+    print("\nInput: bracket_validator('{[]}')")
+    print("Output:", bracket_validator('{[]}'))
+
+    print("\nInput: bracket_validator('hello(world)')")
+    print("Output:", bracket_validator('hello(world)'))
+
+    print("\nInput: bracket_validator('((())')")
+    print("Output:", bracket_validator('((())'))
+
+    print("\nInput: bracket_validator('')")
+    print("Output:", bracket_validator(''))
+
+
+def main2():
+    from sys import argv
+
+    if len(argv) < 2:
+        print("Don't forget the second argument!")
+        return
+
+    s = argv[1]
+    print(f"\nInput: bracket_validator('{s}')")
+    print("Output:", bracket_validator(s))
 
 
 if __name__ == "__main__":
-    s = argv[1]
-
-    print(f"Input: bracket_validator(\"{s}\")")
-    print("Output:", bracket_validator(s))
+    main1()
