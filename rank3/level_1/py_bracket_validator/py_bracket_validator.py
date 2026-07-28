@@ -1,4 +1,5 @@
 
+
 def bracket_validator(s: str) -> bool:
     stack = []
     brackets = {'(': ')', '[': ']', '{': '}'}
@@ -6,7 +7,7 @@ def bracket_validator(s: str) -> bool:
     for c in s:
         if c in brackets:
             stack.append(c)
-        if c in brackets.values():
+        elif c in brackets.values():
             if not stack:
                 return False
             if brackets[stack[-1]] != c:
@@ -54,5 +55,4 @@ def main2():
     print("Output:", bracket_validator(s))
 
 
-if __name__ == "__main__":
-    main1()
+main1()
