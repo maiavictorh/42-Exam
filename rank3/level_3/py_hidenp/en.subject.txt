@@ -27,5 +27,5 @@ Output: False
 Input: hidenp("aaaa", "aaa")
 Output: False
 
-Input: hidenp("sing","subsequence testing")
+Input: hidenp("sing", "subsequence testing")
 Output: True
